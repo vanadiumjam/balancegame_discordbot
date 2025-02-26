@@ -26,6 +26,11 @@ async def bal(ctx, first: str, second: str):
     user = ctx.author.mention
     channel_id = ctx.channel.id  # 채널 ID 기준으로 저장
 
+    # 이미 진행 중인 게임이 있으면 새로운 게임 시작 불가
+    if channel_id in vote_results:
+        await ctx.send("A game is already in progress. Please wait until it finishes!")
+        return
+
     # 해당 채널의 투표 결과 초기화 (first, second 저장)
     vote_results[channel_id] = {"1": 0, "2": 0, "first": first, "second": second}
     user_votes[channel_id] = {}  # 사용자 투표 기록 초기화
