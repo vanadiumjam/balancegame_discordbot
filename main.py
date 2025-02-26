@@ -21,6 +21,9 @@ user_votes = {}  # 각 채널에서 사용자의 투표 여부 저장
 async def on_ready():
     print(f"Bot logged in : {bot.user}")
 
+    activity = discord.Game("Balance Game")
+    await bot.change_presence(status=discord.Status.online, activity=activity)
+
 @bot.command()
 async def bal(ctx, first: str, second: str):
     user = ctx.author.mention
